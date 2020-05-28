@@ -1,0 +1,134 @@
+-- Music Portfolio creation script -------------------------
+
+clear screen;
+
+-- Drop tables ---------------------------------------------
+
+drop table Project cascade constraints purge;
+drop table Song cascade constraints purge;
+
+-- Create Tables -------------------------------------------
+
+create TABLE
+Project (
+	Id int(4, 0) 
+	, Name varchar(20)
+	, Description varchar(300)
+);
+
+create TABLE
+Song (
+	Id int(4, 0)
+    , ProjectId int(4,0)
+    , Name varchar(50)
+    , Description varchar(300)
+    , FilePath varchar(70)
+    , constraint Song_pk primary key (Id)
+);
+
+-- Create Constraints --------------------------------------
+
+alter TABLE
+Song
+add constraint Song_Project_fk foreign key (ProjectId) REFERENCES Project(Id)
+;
+
+-- Insert Data ---------------------------------------------
+
+-- Project Data --------------------------------------------
+
+insert into 
+Project
+values (
+	1
+    , 'Solo Work'
+    , 'As the name implies, this is a collection of songs that I have done purely by myself, but do not have a place in any sort of project/album.'
+);
+
+
+
+-- Song Data ----------------------------------------------
+
+insert into 
+Song
+values (
+	1
+    , 1
+    , 'Alaskoth'
+    , 'Description for the song'
+    , 'mp3/Solo Work/alaskoth-master.mp3'
+);
+
+
+------------------------------------------------------------------------
+second edition
+------------------------------------------------------------------------
+
+-- Create Tables -------------------------------------------
+
+create TABLE
+Project (
+	ProjectId int 
+	, Name varchar(20)
+	, Description varchar(300)
+    , constraint Project_pk primary key (ProjectId)
+);
+
+create sequence
+ProjectId_Seq
+start with 0
+minvalue 0
+;
+
+create TABLE
+Song (
+	SongId int
+    , ProjectId int
+    , Name varchar(50)
+    , Description varchar(300)
+    , FilePath varchar(70)
+    , constraint Song_pk primary key (SongId)
+);
+
+create sequence
+SongId_Seq
+start with 0
+minvalue 0
+;
+
+-- Create Constraints --------------------------------------
+
+alter TABLE
+Song
+add constraint Song_Project_fk foreign key (ProjectId) REFERENCES Project(Id)
+;
+
+-- Insert Data ---------------------------------------------
+
+-- Project Data --------------------------------------------
+
+insert into 
+Project
+values (
+	1
+    , 'Solo Work'
+    , 'As the name implies, this is a collection of songs that I have done purely by myself, but do not have a place in any sort of project/album.'
+);
+
+
+
+-- Song Data ----------------------------------------------
+
+insert into 
+Song
+values (
+	1
+    , 1
+    , 'Alaskoth'
+    , 'Description for the song'
+    , 'mp3/Solo Work/alaskoth-master.mp3'
+);
+
+
+
+
